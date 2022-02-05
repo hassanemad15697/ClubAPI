@@ -1,0 +1,8 @@
+com\spring\clubAPI\model\Player.class
+com\spring\clubAPI\service\PlayerServiceImpl.class
+com\spring\clubAPI\dao\PlayerDaoImpl.class
+com\spring\clubAPI\config\WebXml.class
+com\spring\clubAPI\config\SpringContainer.class
+com\spring\clubAPI\controller\PlayerController.class
+com\spring\clubAPI\dao\PlayerDAO.class
+com\spring\clubAPI\service\PlayerService.class
