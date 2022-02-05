@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,13 +41,11 @@ public class PlayerController {
 		}
 		return player;
 	}
-
-//	@RequestMapping("/add-player")
-//	public String addPlayer(Model model) {
-//		Player player = new Player();
-//		model.addAttribute("playerData", player);
-//		return "add-player";
-//	}
+	// http://localhost:8080/clubAPI/api/add-player
+	@PostMapping("/add-player")
+	public void addPlayer( @RequestBody Player player ) {
+		playerService.savePlayer(player);
+	}
 //
 //	@RequestMapping("/addNewPlayer")
 //	public String signupNewUser(@Valid @ModelAttribute("playerData") Player player, BindingResult bindingResult,
