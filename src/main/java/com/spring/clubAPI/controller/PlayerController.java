@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.clubAPI.exception.PlayerException;
 import com.spring.clubAPI.model.Player;
 import com.spring.clubAPI.service.PlayerService;
 
@@ -29,10 +30,14 @@ public class PlayerController {
 		return playerService.AllPlayers();
 	}
 
-	// http://localhost:8080/clubAPI/api/player
+	// http://localhost:8080/clubAPI/api/player?id=
 	@GetMapping("/player")
 	public Player player(@RequestParam int id) {
-		return playerService.getPlayer(id);
+		Player player = playerService.getPlayer(id);
+		if (player == null) {
+			throw new PlayerException("id : " + id + " not founded!");
+		}
+		return player;
 	}
 
 //	@RequestMapping("/add-player")
