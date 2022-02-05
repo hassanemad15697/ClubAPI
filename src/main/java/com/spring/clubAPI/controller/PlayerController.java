@@ -50,7 +50,7 @@ public class PlayerController {
 	}
 
 	// http://localhost:8080/clubAPI/api/add-player
-	@PutMapping("/add-player")
+	@PutMapping("/add-player") 
 	public void updatePlayer(@RequestBody Player player) {
 		playerService.savePlayer(player);
 	}
