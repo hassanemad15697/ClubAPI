@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.clubAPI.model.Player;
@@ -25,8 +26,44 @@ public class PlayerController {
 	// http://localhost:8080/clubAPI/api/players
 	@GetMapping("/players")
 	public List<Player> players() {
-		System.out.println("in contrller at /players :: ");
-		List<Player> players = playerService.AllPlayers();
-		return players;
+		return playerService.AllPlayers();
 	}
+
+	// http://localhost:8080/clubAPI/api/player
+	@GetMapping("/player")
+	public Player player(@RequestParam int id) {
+		return playerService.getPlayer(id);
+	}
+
+//	@RequestMapping("/add-player")
+//	public String addPlayer(Model model) {
+//		Player player = new Player();
+//		model.addAttribute("playerData", player);
+//		return "add-player";
+//	}
+//
+//	@RequestMapping("/addNewPlayer")
+//	public String signupNewUser(@Valid @ModelAttribute("playerData") Player player, BindingResult bindingResult,
+//			Model model) {
+//		System.out.println(bindingResult);
+//		playerService.savePlayer(player);
+//		// redirect to player list = calling addPlayer method
+//		return "redirect:players-list";
+//
+//	}
+//
+//	@RequestMapping("/updatePlayer")
+//	public String updatePlayer(Model model, @RequestParam("playerID") int id) {
+//		Player player = playerService.getPlayer(id);
+//		model.addAttribute("playerData", player);
+//		return "add-player";
+//	}
+//
+//	@RequestMapping("/deletePlayer")
+//	public String deletePlayer(@RequestParam("playerID") int id) {
+//		Player player = new Player();
+//		player.setPlayerID(id);
+//		playerService.deletePlayer(player);
+//		return "redirect:players-list";
+//	}
 }
