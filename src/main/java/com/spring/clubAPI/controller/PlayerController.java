@@ -3,6 +3,7 @@ package com.spring.clubAPI.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,16 +44,33 @@ public class PlayerController {
 		return player;
 	}
 
-	// http://localhost:8080/clubAPI/api/add-player
-	@PostMapping("/add-player")
-	public void addPlayer(@RequestBody Player player) {
+	// http://localhost:8080/clubAPI/api/player
+	@PostMapping("/player")
+	public String addPlayer(@RequestBody Player player) {
 		playerService.savePlayer(player);
+		return "Added Successfuly";
 	}
 
-	// http://localhost:8080/clubAPI/api/add-player
-	@PutMapping("/add-player") 
-	public void updatePlayer(@RequestBody Player player) {
+	// http://localhost:8080/clubAPI/api/player
+	@PutMapping("/player")
+	public String updatePlayer(@RequestBody Player player) {
+		System.out.println(player.getPlayerID());
+		if (playerService.getPlayer(player.getPlayerID()) == null) {
+			throw new PlayerException("id : " + player.getPlayerID() + " not founded!");
+		}
 		playerService.savePlayer(player);
+		return "Updated Successfuly";
+	}
+
+	// http://localhost:8080/clubAPI/api/player
+	@DeleteMapping("/player")
+	public String deletePlayer(@RequestBody Player player) {
+		System.out.println(player.getPlayerID());
+		if (playerService.getPlayer(player.getPlayerID()) == null) {
+			throw new PlayerException("id : " + player.getPlayerID() + " not founded!");
+		}
+		playerService.deletePlayer(player);
+		return "Deleted Successfuly";
 	}
 //
 //	@RequestMapping("/addNewPlayer")
